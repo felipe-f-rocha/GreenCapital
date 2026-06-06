@@ -48,8 +48,3 @@
 2. Calcular indicadores: NDVI, NDWI, LST e classificar lotes.
 3. Gerar o Relatório de Saúde da Fazenda e apresentá-lo ao comitê de crédito.
 4. Estruturar o crédito com métricas verificáveis e um painel de monitoramento.
-
-**Fonte:** [caso-balmoral.html](caso-balmoral.html)
-
----
-*Gerado a partir do conteúdo de `caso-balmoral.html`; versão em português para o CopernicusLAC Panamá Hackathon 2026 — Segurança alimentar.*

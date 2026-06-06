@@ -51,7 +51,3 @@
 3. Generar el Reporte de Salud de Finca y presentarlo al comité crediticio.
 4. Estructurar el crédito con métricas verificables y dashboard de seguimiento.
 
-**Fuente:** [caso-balmoral.html](caso-balmoral.html)
-
----
-*Resumen generado a partir del contenido de `caso-balmoral.html`; versión principal en español para el CopernicusLAC Panamá Hackathon 2026 — Seguridad alimentaria.*

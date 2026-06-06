@@ -50,8 +50,3 @@
 2. Calculate indicators: NDVI, NDWI, LST and classify plots.
 3. Generate the Farm Health Report and present it to the credit committee.
 4. Structure the loan with verifiable metrics and a monitoring dashboard.
-
-**Source:** [caso-balmoral.html](caso-balmoral.html)
-
----
-*Generated from `caso-balmoral.html`; English version for CopernicusLAC Panama Hackathon 2026 — Food Security.*
