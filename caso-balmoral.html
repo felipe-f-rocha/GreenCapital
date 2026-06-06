@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Caso Balmoral · VerdeCapital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#3ECFB2;--gold:#F5C542;--dark:#071210;--card:#0D1F1A;
+  --text:#E8F5F0;--muted:#9DB8B0;--dim:#4A7A6E;--red:#E24B4A;
+}
+body{background:var(--dark);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* ── GLOBAL ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+@keyframes countUp{from{opacity:0}to{opacity:1}}
+.fade{animation:fadeUp .8s ease both;}
+.fade-1{animation-delay:.1s}
+.fade-2{animation-delay:.25s}
+.fade-3{animation-delay:.4s}
+.fade-4{animation-delay:.55s}
+.fade-5{animation-delay:.7s}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(7,18,16,.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(62,207,178,.12);
+  padding:0 40px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;
+  display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;}
+.logo-dot{width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,#3ECFB2,#F5C542);
+  display:flex;align-items:center;justify-content:center;font-size:15px;}
+.nav-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--green);border:1px solid rgba(62,207,178,.3);
+  border-radius:100px;padding:5px 14px;}
+.hackathon-badge{display:flex;align-items:center;gap:8px;
+  font-size:11px;color:var(--muted);}
+.hb-logo{display:flex;align-items:center;gap:6px;background:rgba(62,207,178,.07);
+  border:1px solid rgba(62,207,178,.2);border-radius:8px;padding:5px 10px;}
+
+/* ── HERO ── */
+.hero{
+  padding:80px 40px 60px;
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#071210 0%,#091a16 50%,#071812 100%);
+}
+.hero::before{
+  content:'';position:absolute;top:-120px;right:-80px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(62,207,178,.055) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-60px;left:-40px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,197,66,.03) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;
+  grid-template-columns:1fr 420px;gap:60px;align-items:center;}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.eye-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green);background:rgba(62,207,178,.1);
+  border:1px solid rgba(62,207,178,.22);border-radius:100px;padding:6px 16px;}
+.eye-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);
+  position:relative;display:inline-block;}
+.eye-dot::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:var(--gold);animation:pulse 1.8s ease-out infinite;}
+h1{font-family:'Cormorant Garamond',serif;
+  font-size:clamp(44px,5.5vw,68px);font-weight:900;
+  line-height:1.03;letter-spacing:-.02em;margin-bottom:22px;}
+h1 em{font-style:normal;color:var(--green);}
+h1 strong{font-style:italic;color:var(--gold);}
+.hero-sub{color:var(--muted);font-size:16px;line-height:1.75;
+  max-width:520px;margin-bottom:36px;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+.htag{font-size:11px;padding:6px 14px;border-radius:100px;
+  border:1px solid rgba(62,207,178,.18);color:var(--muted);}
+.hero-metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.hm{background:rgba(13,31,26,.7);border:1px solid rgba(62,207,178,.14);
+  border-radius:16px;padding:20px;}
+.hm-val{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:900;
+  line-height:1;margin-bottom:5px;}
+.hm-lbl{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.07em;}
+
+/* ── MAP CARD ── */
+.map-card{
+  background:linear-gradient(145deg,#0D1F1A,#091712);
+  border:1px solid rgba(62,207,178,.18);border-radius:24px;
+  padding:28px;position:relative;overflow:hidden;
+}
+.map-card::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(62,207,178,.025) 28px,rgba(62,207,178,.025) 29px),
+             repeating-linear-gradient(90deg,transparent,transparent 28px,rgba(62,207,178,.025) 28px,rgba(62,207,178,.025) 29px);
+}
+.map-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:relative;}
+.map-title{font-weight:700;font-size:14px;}
+.map-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green);}
+.ms-dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+  animation:pulse 1.5s ease-out infinite;}
+/* SVG Panama map */
+.panama-wrap{position:relative;width:100%;aspect-ratio:2/1;}
+.panama-wrap svg{width:100%;height:100%;}
+.location-pin{position:absolute;display:flex;flex-direction:column;align-items:center;}
+.pin-circle{width:12px;height:12px;border-radius:50%;position:relative;}
+.pin-circle::after{content:'';position:absolute;inset:-3px;border-radius:50%;
+  border:1.5px solid currentColor;opacity:.5;animation:pulse 2s ease-out infinite;}
+.pin-label{font-size:9px;color:var(--text);background:rgba(7,18,16,.85);
+  border-radius:4px;padding:2px 5px;margin-top:3px;white-space:nowrap;font-weight:600;}
+.map-legend{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;position:relative;}
+.ml-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);}
+.ml-dot{width:8px;height:8px;border-radius:50%;}
+
+/* ── SECTION GENERIC ── */
+section{padding:60px 40px;}
+.section-wrap{max-width:1100px;margin:0 auto;}
+.eyebrow{color:var(--green);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;margin-bottom:12px;}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,48px);
+  font-weight:900;letter-spacing:-.02em;margin-bottom:40px;}
+h3{font-family:'Cormorant Garamond',serif;font-size:22px;
+  font-weight:700;margin-bottom:10px;}
+
+/* ── CHALLENGE SECTION ── */
+.challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.challenge-card{background:linear-gradient(145deg,#0D1F1A,#0A1712);
+  border:1px solid rgba(62,207,178,.12);border-radius:20px;padding:28px;}
+.challenge-card.problem{border-color:rgba(226,75,74,.22);}
+.cc-icon{font-size:28px;margin-bottom:14px;}
+.cc-title{font-weight:700;font-size:15px;margin-bottom:10px;}
+.cc-body{color:var(--muted);font-size:13px;line-height:1.7;}
+.stat-inline{color:var(--gold);font-weight:700;}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;
+  width:1.5px;background:linear-gradient(180deg,var(--green),rgba(62,207,178,.1));}
+.tl-item{position:relative;margin-bottom:28px;}
+.tl-dot{position:absolute;left:-26px;top:3px;width:12px;height:12px;
+  border-radius:50%;background:var(--green);border:2px solid var(--dark);}
+.tl-date{font-size:10px;color:var(--dim);text-transform:uppercase;
+  letter-spacing:.1em;margin-bottom:4px;}
+.tl-title{font-weight:700;font-size:14px;margin-bottom:6px;}
+.tl-body{color:var(--muted);font-size:13px;line-height:1.6;}
+
+/* ── SOLUTION GRID ── */
+.solution-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.sol-card{background:linear-gradient(145deg,#0D1F1A,#0A1712);
+  border:1px solid rgba(62,207,178,.12);border-radius:20px;padding:26px;
+  transition:transform .3s,border-color .3s;}
+.sol-card:hover{transform:translateY(-5px);border-color:rgba(62,207,178,.35);}
+.sol-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:900;
+  color:rgba(62,207,178,.15);line-height:1;margin-bottom:12px;}
+.sol-icon{font-size:24px;margin-bottom:12px;}
+.sol-title{font-weight:700;font-size:15px;margin-bottom:8px;}
+.sol-body{color:var(--muted);font-size:12px;line-height:1.65;}
+.sol-tag{display:inline-block;margin-top:12px;font-size:10px;
+  padding:4px 10px;border-radius:100px;
+  background:rgba(62,207,178,.1);color:var(--green);
+  border:1px solid rgba(62,207,178,.2);}
+
+/* ── FINANCIALS ── */
+.fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+.fin-table{background:linear-gradient(145deg,#0D1F1A,#0A1712);
+  border:1px solid rgba(62,207,178,.14);border-radius:20px;overflow:hidden;}
+.ft-header{padding:18px 24px;border-bottom:1px solid rgba(62,207,178,.1);
+  font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--muted);}
+.ft-row{padding:14px 24px;border-bottom:1px solid rgba(62,207,178,.06);
+  display:flex;justify-content:space-between;align-items:center;font-size:13px;}
+.ft-row:last-child{border-bottom:none;}
+.ft-label{color:var(--muted);}
+.ft-val{font-weight:700;}
+.ft-val.pos{color:var(--green);}
+.ft-val.neg{color:var(--red);}
+.ft-val.gold{color:var(--gold);}
+.ft-row.total{background:rgba(62,207,178,.04);}
+.kpi-stack{display:flex;flex-direction:column;gap:14px;}
+.kpi{background:linear-gradient(145deg,#0D1F1A,#0A1712);
+  border:1px solid rgba(62,207,178,.1);border-radius:16px;padding:20px;
+  display:flex;align-items:center;gap:16px;}
+.kpi-icon{font-size:26px;flex-shrink:0;}
+.kpi-val{font-family:'Cormorant Garamond',serif;font-size:32px;
+  font-weight:900;line-height:1;}
+.kpi-sub{color:var(--muted);font-size:11px;margin-top:3px;}
+
+/* ── IMPACT ── */
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.imp-card{background:linear-gradient(145deg,#0D1F1A,#0A1712);
+  border:1px solid rgba(62,207,178,.1);border-radius:18px;
+  padding:24px;text-align:center;}
+.imp-icon{font-size:30px;margin-bottom:10px;}
+.imp-val{font-family:'Cormorant Garamond',serif;font-size:36px;
+  font-weight:900;color:var(--green);margin-bottom:4px;}
+.imp-lbl{color:var(--muted);font-size:11px;text-transform:uppercase;
+  letter-spacing:.06em;line-height:1.5;}
+.imp-card:nth-child(2) .imp-val{color:var(--gold);}
+.imp-card:nth-child(4) .imp-val{color:#7DD3C8;}
+
+/* ── COPERNICUS BOX ── */
+.cop-box{background:linear-gradient(135deg,#091a18,#0c2118);
+  border:1px solid rgba(62,207,178,.22);border-radius:24px;
+  padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.cop-left{}
+.cop-eyebrow{color:var(--green);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:12px;}
+.cop-title{font-family:'Cormorant Garamond',serif;font-size:28px;
+  font-weight:900;margin-bottom:14px;}
+.cop-body{color:var(--muted);font-size:13px;line-height:1.75;margin-bottom:20px;}
+.cop-list{list-style:none;}
+.cop-list li{display:flex;align-items:flex-start;gap:9px;
+  font-size:13px;color:#C8E8E0;margin-bottom:9px;}
+.cop-check{color:var(--green);font-size:14px;flex-shrink:0;margin-top:1px;}
+.cop-data-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cop-data{background:rgba(62,207,178,.06);border:1px solid rgba(62,207,178,.12);
+  border-radius:14px;padding:16px;}
+.cop-data-icon{font-size:20px;margin-bottom:6px;}
+.cop-data-title{font-weight:700;font-size:13px;margin-bottom:4px;}
+.cop-data-body{color:var(--muted);font-size:11px;line-height:1.55;}
+
+/* ── HACKATHON CTA ── */
+.hack-cta{
+  background:linear-gradient(135deg,#0D1F1A,#112920);
+  border:1px solid rgba(62,207,178,.2);border-radius:28px;
+  padding:56px 48px;text-align:center;position:relative;overflow:hidden;
+  margin:0 auto;max-width:820px;
+}
+.hack-cta::before{content:'';position:absolute;top:-80px;right:-80px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(62,207,178,.08),transparent 70%);}
+.hack-cta::after{content:'';position:absolute;bottom:-60px;left:-60px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,197,66,.05),transparent 70%);}
+.hack-logos{display:flex;align-items:center;justify-content:center;
+  gap:16px;margin-bottom:28px;position:relative;}
+.hl-badge{background:rgba(62,207,178,.08);border:1px solid rgba(62,207,178,.2);
+  border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;}
+.hl-sep{color:var(--dim);font-size:12px;}
+.hack-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,40px);
+  font-weight:900;margin-bottom:14px;position:relative;}
+.hack-title em{font-style:italic;color:var(--green);}
+.hack-sub{color:var(--muted);font-size:14px;line-height:1.75;
+  max-width:500px;margin:0 auto 32px;position:relative;}
+.hack-btns{display:flex;gap:12px;justify-content:center;
+  flex-wrap:wrap;position:relative;}
+.btn-p{background:linear-gradient(135deg,#3ECFB2,#28A891);
+  border:none;border-radius:12px;padding:15px 38px;
+  color:#071210;font-weight:800;font-size:14px;cursor:pointer;
+  transition:transform .2s,filter .2s;}
+.btn-p:hover{transform:scale(1.04);filter:brightness(1.08);}
+.btn-g{background:transparent;border:1px solid rgba(62,207,178,.3);
+  border-radius:12px;padding:15px 28px;color:var(--text);
+  font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
+.btn-g:hover{background:rgba(62,207,178,.08);}
+.challenge-num{display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:6px;font-size:11px;font-weight:800;
+  background:var(--gold);color:#071210;margin-right:4px;}
+
+/* ── FOOTER ── */
+footer{padding:32px 40px;border-top:1px solid rgba(62,207,178,.1);
+  text-align:center;color:var(--dim);font-size:12px;}
+footer span{color:var(--green);}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(62,207,178,.15),transparent);
+  margin:0;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:780px){
+  .hero-inner,.challenge-grid,.fin-grid,.cop-box,.solution-grid{grid-template-columns:1fr!important;}
+  .impact-grid{grid-template-columns:1fr 1fr!important;}
+  .hero-metrics{grid-template-columns:1fr 1fr;}
+  h1{font-size:38px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-dot">🌿</div>
+    Verde<span style="color:#3ECFB2">Capital</span>
+  </a>
+  <div class="nav-tag">Caso de Uso · Challenge #2</div>
+  <div class="hackathon-badge">
+    <div class="hb-logo">🛰️ CopernicusLAC Hackathon 3°</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow fade fade-1">
+        <div class="eye-dot"></div>
+        <div class="eye-tag">Caso Balmoral · Agro-industrial, Panamá</div>
+      </div>
+      <h1 class="fade fade-2">
+        Financiación <em>verde</em><br/>
+        para <strong>Finca Balmoral</strong>
+      </h1>
+      <p class="hero-sub fade fade-3">
+        Cómo VerdeCapital habilitó la transición tecnológica de un productor
+        bananero a gran escala en Chiriquí, usando datos satelitales Copernicus
+        para estructurar un crédito verde de <span style="color:var(--gold);font-weight:700;">$2.4M USD</span>.
+      </p>
+      <div class="hero-tags fade fade-4">
+        <span class="htag">🍌 Sector Bananero</span>
+        <span class="htag">📡 Datos Sentinel-2</span>
+        <span class="htag">⚡ Eficiencia Hídrica</span>
+        <span class="htag">🌿 Carbono Neutro 2028</span>
+        <span class="htag">Challenge #2 — Gran Escala</span>
+      </div>
+      <div class="hero-metrics fade fade-5">
+        <div class="hm">
+          <div class="hm-val" style="color:var(--green);">$2.4M</div>
+          <div class="hm-lbl">Crédito estructurado</div>
+        </div>
+        <div class="hm">
+          <div class="hm-val" style="color:var(--gold);">41%</div>
+          <div class="hm-lbl">Ahorro hídrico logrado</div>
+        </div>
+        <div class="hm">
+          <div class="hm-val" style="color:#7DD3C8;">1,800</div>
+          <div class="hm-lbl">Hectáreas monitoreadas</div>
+        </div>
+        <div class="hm">
+          <div class="hm-val" style="color:var(--green);">3.2</div>
+          <div class="hm-lbl">Años payback estimado</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP CARD -->
+    <div class="map-card fade fade-3">
+      <div class="map-header">
+        <div class="map-title">📍 Finca Balmoral, Chiriquí</div>
+        <div class="map-status">
+          <div class="ms-dot"></div>Monitoreo activo
+        </div>
+      </div>
+      <!-- Schematic map of Panama with Chiriquí highlighted -->
+      <div class="panama-wrap">
+        <svg viewBox="0 0 380 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Panama body outline (simplified) -->
+          <path d="M10,130 Q30,120 55,115 Q80,110 100,100 Q130,90 155,85
+                   Q170,82 185,80 Q200,82 215,84 Q240,82 260,78
+                   Q285,72 310,68 Q335,64 360,66 L368,75 Q355,78 330,82
+                   Q305,86 282,92 Q260,98 240,105 Q220,112 200,118
+                   Q180,122 160,125 Q135,128 110,132
+                   Q85,136 65,140 Q40,145 20,148 Z"
+                fill="rgba(62,207,178,0.08)" stroke="rgba(62,207,178,0.22)" stroke-width="1.5"/>
+          <!-- Canal zone highlight -->
+          <rect x="185" y="78" width="30" height="48" rx="4"
+                fill="rgba(245,197,66,0.07)" stroke="rgba(245,197,66,0.2)" stroke-width="1"/>
+          <!-- Chiriquí highlight -->
+          <ellipse cx="65" cy="125" rx="38" ry="20"
+                   fill="rgba(62,207,178,0.15)" stroke="rgba(62,207,178,0.4)" stroke-width="1.5"/>
+          <!-- Balmoral pin -->
+          <circle cx="62" cy="120" r="6" fill="#3ECFB2"/>
+          <circle cx="62" cy="120" r="10" fill="none" stroke="#3ECFB2" stroke-width="1" opacity=".4">
+            <animate attributeName="r" from="6" to="16" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from=".5" to="0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Panama City pin -->
+          <circle cx="210" cy="102" r="4" fill="#F5C542"/>
+          <!-- Labels -->
+          <text x="40" y="148" font-size="9" fill="#9DB8B0" font-family="DM Sans,sans-serif">Chiriquí</text>
+          <text x="185" y="135" font-size="8" fill="#9DB8B0" font-family="DM Sans,sans-serif">Canal</text>
+          <text x="200" y="97" font-size="8" fill="#F5C542" font-family="DM Sans,sans-serif">PTY</text>
+          <!-- Satellite data overlay lines -->
+          <line x1="62" y1="5" x2="62" y2="110" stroke="rgba(62,207,178,.12)" stroke-width="1" stroke-dasharray="3,4"/>
+          <circle cx="62" cy="5" r="4" fill="rgba(62,207,178,.25)"/>
+          <text x="68" y="10" font-size="8" fill="rgba(62,207,178,.5)" font-family="DM Sans,sans-serif">Sentinel-2</text>
+        </svg>
+      </div>
+      <div class="map-legend">
+        <div class="ml-item"><div class="ml-dot" style="background:#3ECFB2;"></div>Finca Balmoral (1,800 ha)</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#F5C542;"></div>Ciudad de Panamá</div>
+        <div class="ml-item"><div class="ml-dot" style="background:rgba(62,207,178,.3);"></div>Zona del Canal</div>
+      </div>
+
+      <!-- Mini stats inside map card -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px;">
+        <div style="background:rgba(62,207,178,.07);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:14px;font-weight:800;color:var(--green);">NDVI</div>
+          <div style="font-size:10px;color:var(--muted);">0.68 → 0.81</div>
+        </div>
+        <div style="background:rgba(245,197,66,.07);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:14px;font-weight:800;color:var(--gold);">NDWI</div>
+          <div style="font-size:10px;color:var(--muted);">Estrés hídrico ↓</div>
+        </div>
+        <div style="background:rgba(62,207,178,.07);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:14px;font-weight:800;color:var(--green);">LST</div>
+          <div style="font-size:10px;color:var(--muted);">Temperatura suelo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHALLENGE SECTION -->
+<section style="background:linear-gradient(180deg,transparent,rgba(13,31,26,.3),transparent);">
+  <div class="section-wrap">
+    <p class="eyebrow fade">El Problema</p>
+    <h2 class="fade fade-1">¿Por qué Balmoral necesitaba un<br/>crédito diferente?</h2>
+    <div class="challenge-grid">
+      <div class="challenge-card problem fade fade-2">
+        <div class="cc-icon">💧</div>
+        <h3 class="cc-title">Crisis hídrica en Chiriquí</h3>
+        <p class="cc-body">
+          Los sistemas de riego convencionales de Balmoral consumían
+          <span class="stat-inline">420,000 m³ de agua por ciclo</span>, generando
+          sobreexplotación del acuífero local. Las temporadas secas de 2022–2023
+          redujeron el rendimiento un <span class="stat-inline">28%</span>.
+          Los bancos tradicionales rechazaron el crédito por falta de garantías satelitales.
+        </p>
+      </div>
+      <div class="challenge-card problem fade fade-3">
+        <div class="cc-icon">⚡</div>
+        <h3 class="cc-title">Costos energéticos insostenibles</h3>
+        <p class="cc-body">
+          La infraestructura de bombeo diésel representaba
+          <span class="stat-inline">$38,000/mes</span> en combustible.
+          Sin datos objetivos de eficiencia, ninguna entidad financiera podía
+          estructurar un crédito verde. El productor quedaba atrapado en un
+          ciclo de alta emisión y <span class="stat-inline">baja rentabilidad</span>.
+        </p>
+      </div>
+      <div class="challenge-card fade fade-4">
+        <div class="cc-icon">📡</div>
+        <h3 class="cc-title">La brecha de datos</h3>
+        <p class="cc-body">
+          Sin una fuente de datos independiente y verificable sobre el estado real
+          de los cultivos y el uso del agua, el riesgo crediticio era opaco.
+          VerdeCapital identificó que los datos <span class="stat-inline">Sentinel-2 de Copernicus</span>
+          podían actuar como el colateral tecnológico que los bancos necesitaban.
+        </p>
+      </div>
+      <div class="challenge-card fade fade-5">
+        <div class="cc-icon">🌿</div>
+        <h3 class="cc-title">Oportunidad de mercado</h3>
+        <p class="cc-body">
+          Panamá tiene <span class="stat-inline">más de 120 productores</span> a gran escala
+          en situación similar. Un modelo replicable en Balmoral abriría un mercado de
+          crédito verde superior a <span class="stat-inline">$180M USD</span> solo en el
+          sector agro-exportador de Chiriquí y Bocas del Toro.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOLUTION -->
+<section>
+  <div class="section-wrap">
+    <p class="eyebrow">Nuestra Solución</p>
+    <h2>Tres capas de innovación</h2>
+    <div class="solution-grid">
+      <div class="sol-card">
+        <div class="sol-num">01</div>
+        <div class="sol-icon">🛰️</div>
+        <h3 class="sol-title">Diagnóstico satelital Copernicus</h3>
+        <p class="sol-body">
+          Series temporales de Sentinel-2 (2020–2025) para calcular NDVI, NDWI
+          y temperatura superficial. Generamos un <em>Reporte de Salud de Finca</em>
+          que reemplaza el peritaje tradicional como colateral crediticio.
+        </p>
+        <span class="sol-tag">📊 36 meses de datos</span>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">02</div>
+        <div class="sol-icon">💰</div>
+        <h3 class="sol-title">Crédito verde estructurado</h3>
+        <p class="sol-body">
+          VerdeCapital estructuró un crédito de <strong style="color:var(--gold);">$2.4M USD</strong>
+          a 7 años, tasa preferencial 6.8%, condicionado al cumplimiento de métricas
+          de reducción hídrica y emisiones verificadas vía satélite trimestralmente.
+        </p>
+        <span class="sol-tag">✅ Ley 37/2016 Panamá</span>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">03</div>
+        <div class="sol-icon">📱</div>
+        <h3 class="sol-title">Plataforma de monitoreo ROI</h3>
+        <p class="sol-body">
+          Dashboard en tiempo real integrado con la API de Copernicus.
+          El productor y el financiador ven en la misma pantalla el avance en
+          eficiencia, los bonos de carbono generados y el estado del crédito.
+        </p>
+        <span class="sol-tag">🔄 Actualización 10 días</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIMELINE -->
+<section style="background:linear-gradient(180deg,transparent,rgba(13,31,26,.4),transparent);">
+  <div class="section-wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
+      <div>
+        <p class="eyebrow">Implementación</p>
+        <h2>De la solicitud<br/>a la operación</h2>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">Agosto 2024</div>
+            <div class="tl-title">Diagnóstico satelital inicial</div>
+            <div class="tl-body">Descarga y procesamiento de 36 meses de imágenes Sentinel-2.
+              Generación del Reporte de Salud de Finca con índices NDVI, NDWI y LST.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">Septiembre 2024</div>
+            <div class="tl-title">Estructuración del crédito</div>
+            <div class="tl-body">VerdeCapital presentó el expediente satelital al comité de
+              crédito. Aprobación en 48 horas. Desembolso del primer tramo: $800K USD.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">Oct – Dic 2024</div>
+            <div class="tl-title">Instalación del sistema de riego por goteo</div>
+            <div class="tl-body">Sustitución de 1,200 ha de aspersión convencional por
+              goteo presurizado solar. Integración de sensores IoT con la plataforma VerdeCapital.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background:var(--gold);"></div>
+            <div class="tl-date">Enero 2025 →</div>
+            <div class="tl-title">Monitoreo continuo &amp; bonos de carbono</div>
+            <div class="tl-body">Primer reporte trimestral: NDWI mejoró 0.13 puntos.
+              Ahorro hídrico certificado: 170,000 m³. Bonos de carbono generados: $12,400.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin-top:8px;">Tecnología utilizada</p>
+        <h2>Stack<br/>Copernicus</h2>
+        <div class="cop-data-grid">
+          <div class="cop-data">
+            <div class="cop-data-icon">🛰️</div>
+            <div class="cop-data-title">Sentinel-2 MSI</div>
+            <div class="cop-data-body">Bandas B4, B8, B3, B11 para NDVI, NDWI y clasificación de cultivos. Resolución 10m.</div>
+          </div>
+          <div class="cop-data">
+            <div class="cop-data-icon">🌡️</div>
+            <div class="cop-data-title">Sentinel-3 SLSTR</div>
+            <div class="cop-data-body">Temperatura superficial terrestre para estrés térmico. Alertas de riego automatizadas.</div>
+          </div>
+          <div class="cop-data">
+            <div class="cop-data-icon">🌧️</div>
+            <div class="cop-data-title">Copernicus CDS ERA5</div>
+            <div class="cop-data-body">Datos climáticos reanálisis para modelar demanda hídrica y planificar ciclos de cultivo.</div>
+          </div>
+          <div class="cop-data">
+            <div class="cop-data-icon">🔗</div>
+            <div class="cop-data-title">API VerdeCapital</div>
+            <div class="cop-data-body">Integración REST con Copernicus Dataspace Ecosystem. Actualización automática cada 10 días.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINANCIALS -->
+<section>
+  <div class="section-wrap">
+    <p class="eyebrow">Resultados Financieros</p>
+    <h2>Números que hablan</h2>
+    <div class="fin-grid">
+      <div>
+        <div class="fin-table">
+          <div class="ft-header">ESTRUCTURA FINANCIERA DEL CRÉDITO</div>
+          <div class="ft-row"><span class="ft-label">Monto total del crédito</span><span class="ft-val gold">$2,400,000</span></div>
+          <div class="ft-row"><span class="ft-label">Plazo</span><span class="ft-val">7 años</span></div>
+          <div class="ft-row"><span class="ft-label">Tasa de interés (preferencial verde)</span><span class="ft-val pos">6.8% APR</span></div>
+          <div class="ft-row"><span class="ft-label">Tasa convencional equivalente</span><span class="ft-val neg">11.5% APR</span></div>
+          <div class="ft-row"><span class="ft-label">Ahorro en intereses (tasa diferencial)</span><span class="ft-val pos">+$364,000</span></div>
+          <div class="ft-row"><span class="ft-label">Deducción fiscal Ley 37/2016</span><span class="ft-val pos">+$240,000</span></div>
+          <div class="ft-row total"><span class="ft-label" style="font-weight:700;">Beneficio total sobre tasa convencional</span><span class="ft-val pos" style="font-size:15px;">+$604,000</span></div>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="fin-table">
+            <div class="ft-header">AHORRO OPERACIONAL ANUAL PROYECTADO</div>
+            <div class="ft-row"><span class="ft-label">Combustible diésel (bombas)</span><span class="ft-val pos">+$312,000</span></div>
+            <div class="ft-row"><span class="ft-label">Agua (reducción 41% consumo)</span><span class="ft-val pos">+$87,000</span></div>
+            <div class="ft-row"><span class="ft-label">Mantenimiento infraestructura</span><span class="ft-val pos">+$64,000</span></div>
+            <div class="ft-row"><span class="ft-label">Bonos de carbono (CO₂ evitado)</span><span class="ft-val pos">+$49,600</span></div>
+            <div class="ft-row total"><span class="ft-label" style="font-weight:700;">Ahorro operacional total/año</span><span class="ft-val pos" style="font-size:15px;">+$512,600</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-stack">
+        <div class="kpi">
+          <div class="kpi-icon">⚡</div>
+          <div>
+            <div class="kpi-val" style="color:var(--green);">3.2 años</div>
+            <div class="kpi-sub">Payback del crédito — 4.8 años menos que la media sectorial</div>
+          </div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon">💧</div>
+          <div>
+            <div class="kpi-val" style="color:#7DD3C8;">41%</div>
+            <div class="kpi-sub">Reducción en consumo hídrico — verificado vía Sentinel-2</div>
+          </div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon">🌿</div>
+          <div>
+            <div class="kpi-val" style="color:var(--green);">1,240 ton</div>
+            <div class="kpi-sub">CO₂ evitado anualmente — certificable en mercado voluntario</div>
+          </div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon">📈</div>
+          <div>
+            <div class="kpi-val" style="color:var(--gold);">+18%</div>
+            <div class="kpi-sub">Mejora en rendimiento de producción por hectárea</div>
+          </div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon">🏦</div>
+          <div>
+            <div class="kpi-val" style="color:var(--green);">48 h</div>
+            <div class="kpi-sub">Tiempo de aprobación del crédito con colateral satelital</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- IMPACT -->
+<section style="background:linear-gradient(180deg,transparent,rgba(13,31,26,.35),transparent);">
+  <div class="section-wrap">
+    <p class="eyebrow">Impacto</p>
+    <h2>Más allá de los números</h2>
+    <div class="impact-grid">
+      <div class="imp-card">
+        <div class="imp-icon">🌊</div>
+        <div class="imp-val">172K</div>
+        <div class="imp-lbl">m³ de agua ahorrados por ciclo productivo</div>
+      </div>
+      <div class="imp-card">
+        <div class="imp-icon">👨‍👩‍👧</div>
+        <div class="imp-val">340</div>
+        <div class="imp-lbl">empleos rurales directos asegurados</div>
+      </div>
+      <div class="imp-card">
+        <div class="imp-icon">🌳</div>
+        <div class="imp-val">55,800</div>
+        <div class="imp-lbl">árboles equivalentes en CO₂ compensado</div>
+      </div>
+      <div class="imp-card">
+        <div class="imp-icon">🔄</div>
+        <div class="imp-val">120+</div>
+        <div class="imp-lbl">productores con potencial de replicación en Panamá</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COPERNICUS BOX -->
+<section>
+  <div class="section-wrap">
+    <div class="cop-box">
+      <div class="cop-left">
+        <div class="cop-eyebrow">🛰️ Copernicus como habilitador</div>
+        <div class="cop-title">Por qué los datos<br/>satelitales transforman<br/>el crédito verde</div>
+        <p class="cop-body">
+          Sin Copernicus, Balmoral era invisible para el sistema financiero.
+          Con datos Sentinel-2, VerdeCapital pudo construir un expediente
+          crediticio objetivo, auditable y actualizable. El satélite se convierte
+          en el <strong style="color:var(--green);">"notario digital"</strong> del agro panameño.
+        </p>
+        <ul class="cop-list">
+          <li><span class="cop-check">✓</span>Reemplaza peritajes presenciales costosos (~$8,000 por finca)</li>
+          <li><span class="cop-check">✓</span>Monitoreo continuo del cumplimiento de metas ambientales</li>
+          <li><span class="cop-check">✓</span>Datos abiertos y gratuitos — reduce costo del crédito verde</li>
+          <li><span class="cop-check">✓</span>Historial de 5+ años para analizar riesgo climático real</li>
+          <li><span class="cop-check">✓</span>Compatible con estándares IFC/GreenBond para emisiones</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;
+          letter-spacing:.1em;margin-bottom:16px;">Datos Copernicus utilizados</div>
+        <div class="cop-data-grid">
+          <div class="cop-data">
+            <div class="cop-data-icon">🗺️</div>
+            <div class="cop-data-title">Clasificación de cultivos</div>
+            <div class="cop-data-body">Random Forest sobre series NDVI para delimitar lotes de producción y detectar estrés.</div>
+          </div>
+          <div class="cop-data">
+            <div class="cop-data-icon">💧</div>
+            <div class="cop-data-title">Índice hídrico NDWI</div>
+            <div class="cop-data-body">Cuantificación del contenido de agua en vegetación. Base para medir ahorro certificable.</div>
+          </div>
+          <div class="cop-data">
+            <div class="cop-data-icon">🔥</div>
+            <div class="cop-data-title">Alertas de sequía</div>
+            <div class="cop-data-body">Integración con CDS ERA5 para alertas tempranas y ajuste automático del plan de riego.</div>
+          </div>
+          <div class="cop-data">
+            <div class="cop-data-icon">📉</div>
+            <div class="cop-data-title">Verificación de reducción</div>
+            <div class="cop-data-body">Comparación pre/post instalación para calcular toneladas CO₂ evitadas y bonos generados.</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:16px;background:rgba(62,207,178,.05);
+          border:1px solid rgba(62,207,178,.12);border-radius:12px;">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">
+            Alineación con Challenge #2 del Hackathon</div>
+          <div style="font-size:13px;line-height:1.6;color:#C8E8E0;">
+            <span class="challenge-num">2</span>
+            <strong>Mejorar el rendimiento de los productores a gran escala</strong> —
+            El caso Balmoral demuestra cómo los datos Copernicus pueden estructurar
+            financiamiento verde para productores de &gt;500 ha, desbloqueando
+            capital que el sistema financiero tradicional no provee.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HACKATHON CTA -->
+<section>
+  <div class="section-wrap">
+    <div class="hack-cta">
+      <div class="hack-logos">
+        <div class="hl-badge">🌿 VerdeCapital</div>
+        <div class="hl-sep">×</div>
+        <div class="hl-badge">🛰️ CopernicusLAC</div>
+        <div class="hl-sep">×</div>
+        <div class="hl-badge" style="color:var(--gold);border-color:rgba(245,197,66,.25);
+          background:rgba(245,197,66,.07);">🌿 ESA · BID</div>
+      </div>
+      <div class="hack-title">
+        Replica el modelo Balmoral<br/>en tu <em>finca o empresa</em>
+      </div>
+      <p class="hack-sub">
+        VerdeCapital propone este caso como prototipo replicable para el
+        3° CopernicusLAC Hackathon. El objetivo: un playbook abierto para que
+        cualquier productor panameño a gran escala acceda a crédito verde
+        respaldado por datos satelitales.
+      </p>
+      <div class="hack-btns">
+        <button class="btn-p">Simula tu caso →</button>
+        <button class="btn-g">Ver plataforma VerdeCapital</button>
+      </div>
+      <div style="margin-top:28px;font-size:11px;color:var(--dim);position:relative;">
+        Hackathon CopernicusLAC · Challenge #2 · 21 mayo – 11 junio 2025 · Panamá
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Caso <span>Balmoral</span> · VerdeCapital Panamá · Preparado para el
+  <span>3° CopernicusLAC Hackathon</span> implementado por ESA &amp; BID</p>
+  <p style="margin-top:6px;color:rgba(74,122,110,.5);">
+    Datos Copernicus abiertos · Sentinel-2 · ERA5 · Dataspace Ecosystem</p>
+</footer>
+
+</body>
+</html>
